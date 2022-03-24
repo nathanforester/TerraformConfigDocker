@@ -1,0 +1,12 @@
+- name: docker swarm
+  become: true
+  hosts: main
+  roles:
+    - docker
+    - docker-swarm
+- name: add hosts
+  become: true
+  hosts: hosts
+  roles:
+    - docker
+    - docker-swarm-hosts

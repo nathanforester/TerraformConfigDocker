@@ -1,0 +1,7 @@
+---
+    - name: Add worker to manager node
+      community.general.docker_swarm:
+        state: join
+        advertise_addr: worker
+        join_token: "{{ hostvars['main']['swarm_info']['swarm_facts']['JoinTokens']['Worker'] }}"
+        remote_addrs: [ 'main:2377' ]

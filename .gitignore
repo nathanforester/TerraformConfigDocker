@@ -1,0 +1,11 @@
+secret.tfvars
+.terraform.lock.hcl
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+Estio-Training-NForester
+FlaskDeploymentCloud/
+APIFlaskDocker/workspace.code-workspace
+APIFlaskDocker/proof_of_lesson.jpg
+APIFlaskDocker/lb-asg-solved.jpg
+

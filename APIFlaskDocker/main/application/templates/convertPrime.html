@@ -1,0 +1,15 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRIME Age in Months</title>
+</head>
+<body>
+    <h1>Birth Year is: {{ formData }}</h1>
+    <h2>Age in months is: {{ birthDate }}</h2>
+    <h3>Are you PRIME?: {{ prime }}</h3>
+    <form method="post" mimetype='application/json' action='{{url_for("index")}}'>
+       <p><input type="submit" value="Start Again" /></p>
+    </form>
+</body>
+</html>

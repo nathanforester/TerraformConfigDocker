@@ -1,0 +1,12 @@
+all:
+  children:
+    main:
+      hosts:
+        34.142.91.232:
+    hosts:
+      worker:
+        3.8.2.224:
+  vars:
+    ansible_user: ubuntu
+    ansible_ssh_private_key_file: "~/.ssh/New-Key.pem"
+    ansible_ssh_common_args: "-o StrictHostKeyChecking=no"
