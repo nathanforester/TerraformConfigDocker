@@ -6,19 +6,19 @@ pipeline {
                     description: 'Read Jenkinsfile and exit.')
 		    }
     stages {
-        stage('Pre') { 
-            steps {
-                sh 'ansible-playbook -v -i /home/jenkins/.jenkins/workspace/FlaskApp/inventory.yaml /home/jenkins/.jenkins/workspace/FlaskApp/playbook.yaml'
-            }
-        }
-        stage('Test') { 
-            steps {
-                sh 'sudo pytest /home/jenkins/.jenkins/workspace/FlaskApp/'
-            }
-        }
+        // stage('Pre') { 
+        //     steps {
+        //         sh 'ansible-playbook -v -i /home/jenkins/.jenkins/workspace/FlaskApp/inventory.yaml /home/jenkins/.jenkins/workspace/FlaskApp/playbook.yaml'
+        //     }
+        // }
+        // stage('Test') { 
+        //     steps {
+        //         sh 'sudo pytest /home/jenkins/.jenkins/workspace/FlaskApp/'
+        //     }
+        // }
         stage('Building & Deploying') {
             steps {
-                sh 'sudo docker-compose up /home/jenkins/.jenkins/workspace/FlaskApp/'
+                sh 'sudo docker-compose -f /home/jenkins/.jenkins/workspace/APIFlaskDocker/docker-compose.yaml up -d'
             }
         }
     }

@@ -160,6 +160,25 @@ resource "null_resource" "connect_jenkins" {
   depends_on = [aws_instance.jenkins]
 }
 
+resource "null_resource" "file_transfer_jenkins" {
+    provisioner "file" {
+        source = "./APIFlaskDocker"
+        destination = "/home/ubuntu/"
+
+        connection {
+            type        = "ssh"
+            user        = "ubuntu"
+            private_key = "${file("Estio-Training-NForester")}"
+            host        = aws_instance.jenkins.public_ip
+        }
+    }
+
+    depends_on = [
+        aws_instance.jenkins
+    ] 
+    
+}
+
 resource "aws_instance" "deploy" {
 	ami = var.ami_app
 	instance_type = "t2.micro"
@@ -261,6 +280,24 @@ resource "null_resource" "docker_compose" {
       ]
     connection {
       host        = aws_instance.deploy.public_ip
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = file("./Estio-Training-NForester")
+    }
+    
+  }
+  depends_on = [null_resource.connect_ansible]
+}
+
+resource "null_resource" "manage_jenkins_workspace" {
+  provisioner "remote-exec" {
+    inline = [
+      "sudo su -l jenkins -c 'sudo mkdir /home/jenkins/workspace'",
+      "sudo su -l jenkins -c 'sudo mv /home/ubuntu/APIPrimeAge /home/jenkins/workspace'",
+      "sudo su -l ubuntu -c 'sudo chown jenkins /home/jenkins/workspace/APIPrimeAge'"
+       ]
+    connection {
+      host        = aws_instance.jenkins.public_ip
       type        = "ssh"
       user        = "ubuntu"
       private_key = file("./Estio-Training-NForester")
